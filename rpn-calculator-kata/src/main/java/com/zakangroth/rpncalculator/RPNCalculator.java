@@ -1,8 +1,9 @@
 package com.zakangroth.rpncalculator;
 
 import java.util.Arrays;
+import java.util.Deque;
 import java.util.Optional;
-import java.util.function.IntBinaryOperator;
+import java.util.function.Consumer;
 import java.util.regex.Pattern;
 
 /**
@@ -10,8 +11,8 @@ import java.util.regex.Pattern;
  * a number X, in which case the value of the expression is that of X;
  * a sequence of the form E1 E2 O, where E1 and E2 are postfix expressions and O is an arithmetic operation;
  * in this case, the value of the expression is that of E1 O E2
- *
- *
+ * <p>
+ * <p>
  * Examples :
  * 1 => 1
  * 1 2 + => (1 + 2) = 3
@@ -24,21 +25,41 @@ import java.util.regex.Pattern;
 public class RPNCalculator {
 
     private enum Operator {
-        ADD("+", (i1, i2) -> i1 + i2),
-        SUB("-", (i1, i2) -> i2 - i1),
-        DIV("/", (i1, i2) -> i2 / i1),
-        MULT("*", (i1, i2) -> i1 * i2);
+        ADD("+", (deque) -> {
+            int i1 = deque.poll();
+            int i2 = deque.poll();
+            deque.push(i1 + i2);
+        }),
+        SUB("-", (deque) -> {
+            int i1 = deque.poll();
+            int i2 = deque.poll();
+            deque.push(i2 - i1);
+        }),
+        DIV("/", (deque) -> {
+            int i1 = deque.poll();
+            int i2 = deque.poll();
+            deque.push(i2 / i1);
+        }),
+        MULT("*", (deque) -> {
+            int i1 = deque.poll();
+            int i2 = deque.poll();
+            deque.push(i1 * i2);
+        }),
+        SQRT("SQRT", (deque) -> {
+            int i = deque.poll();
+            deque.push((int)Math.sqrt(i));
+        });
 
         private final String symbol;
-        private final IntBinaryOperator operator;
+        private final Consumer<Deque<Integer>> operator;
 
-        Operator(String symbol, IntBinaryOperator operator) {
+        Operator(String symbol, Consumer<Deque<Integer>> operator) {
             this.symbol = symbol;
             this.operator = operator;
         }
 
-        public int convert(int i1, int i2) {
-            return operator.applyAsInt(i1, i2);
+        public void convert(Deque<Integer> deque) {
+            operator.accept(deque);
         }
 
         public static Operator of(String operationElement) {
@@ -63,10 +84,7 @@ public class RPNCalculator {
                 .forEach(
                         operationElement -> {
                             if (Operator.isOperator(operationElement)) {
-                                int leftOperand = deque.poll();
-                                int rightOperand = deque.poll();
-                                int result = Operator.of(operationElement).convert(leftOperand, rightOperand);
-                                deque.push(result);
+                                Operator.of(operationElement).convert(deque);
                             } else {
                                 deque.push(operationElement);
                             }
