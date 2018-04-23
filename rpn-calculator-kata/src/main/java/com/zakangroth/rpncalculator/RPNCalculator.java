@@ -81,16 +81,16 @@ public class RPNCalculator {
         }
     }
 
-    public int convert(String input) {
+    public int convert(String inputChain) {
         RPNCalculatorArrayDeque deque = new RPNCalculatorArrayDeque();
 
-        Pattern.compile(" ").splitAsStream(input)
+        Pattern.compile(" ").splitAsStream(inputChain)
                 .forEach(
-                        operationElement -> {
-                            if (Operator.isOperator(operationElement)) {
-                                Operator.of(operationElement).convert(deque);
+                        input -> {
+                            if (Operator.isOperator(input)) {
+                                Operator.of(input).convert(deque);
                             } else {
-                                deque.push(operationElement);
+                                deque.push(input);
                             }
                         }
                 );
