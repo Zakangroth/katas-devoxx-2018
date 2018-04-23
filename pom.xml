@@ -10,9 +10,10 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>fizzBuzz-kata</module>
+        <module>fizzbuzz-kata</module>
         <module>leap-year-kata</module>
         <module>rpn-calculator-kata</module>
+        <module>string-calculator-kata</module>
     </modules>
 
     <properties>
