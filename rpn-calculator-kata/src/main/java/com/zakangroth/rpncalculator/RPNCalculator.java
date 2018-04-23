@@ -1,6 +1,5 @@
 package com.zakangroth.rpncalculator;
 
-import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.function.IntBinaryOperator;
@@ -27,7 +26,8 @@ public class RPNCalculator {
     private enum Operator {
         ADD("+", (i1, i2) -> i1 + i2),
         SUB("-", (i1, i2) -> i2 - i1),
-        DIV("/", (i1, i2) -> i2 / i1);
+        DIV("/", (i1, i2) -> i2 / i1),
+        MULT("*", (i1, i2) -> i1 * i2);
 
         private final String symbol;
         private final IntBinaryOperator operator;
