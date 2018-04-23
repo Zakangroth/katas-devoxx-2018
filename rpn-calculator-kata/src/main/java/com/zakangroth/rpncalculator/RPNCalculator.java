@@ -19,7 +19,7 @@ package com.zakangroth.rpncalculator;
 public class RPNCalculator {
 
     public int convert(String input) {
-        return 0;
+        return Integer.parseInt(input);
     }
 
 }
