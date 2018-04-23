@@ -1,6 +1,9 @@
 package com.zakangroth.stringcalculator;
 
+import java.util.OptionalInt;
+import java.util.function.Supplier;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
 /**
  * Multiple calculations bases on String typed inputs.
@@ -31,6 +34,14 @@ public class StringCalculator {
     }
 
     private int add(String values, String separator){
-        return Pattern.compile(separator).splitAsStream(values).mapToInt(Integer::parseInt).sum();
+
+        Supplier<Stream<String>> streamSupplier = () -> Pattern.compile(separator).splitAsStream(values);
+        OptionalInt result = streamSupplier.get().mapToInt(Integer::parseInt).filter(num -> num < 0).findAny();
+
+        if(result.isPresent()){
+            throw new NumberFormatException("negatives not allowed");
+        }
+
+        return streamSupplier.get().mapToInt(Integer::parseInt).filter(num -> num < 1000).sum();
     }
 }

@@ -53,12 +53,34 @@ public class StringCalculatorTest {
 
         assertEquals(expectedOutput, output);
     }
+
     @Test
     public void should_return_4_for_an_input_of_2_custom_separator_2_and_custom_separator_is_w() {
 
         StringCalculator calculator = new StringCalculator();
         String input = "//w\n2w2";
         int expectedOutput = 4;
+
+        int output = calculator.add(input);
+
+        assertEquals(expectedOutput, output);
+    }
+
+    @Test(expected = NumberFormatException.class)
+    public void should_return_number_format_exception_for_input_minus_5() {
+
+        StringCalculator calculator = new StringCalculator();
+        String input = "-5";
+
+        calculator.add(input);
+    }
+
+    @Test
+    public void should_return_6_for_input_6_comma_1325() {
+
+        StringCalculator calculator = new StringCalculator();
+        String input = "6,1325";
+        int expectedOutput = 6;
 
         int output = calculator.add(input);
 
