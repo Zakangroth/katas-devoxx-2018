@@ -1,5 +1,11 @@
 package com.zakangroth.fizzbuzzkata;
 
+/**
+ * This class is intended to return :
+ * Fizz for numbers divisible by 3
+ * Buzz for numbers divisible by 5
+ * FizzBuzz for numbers divisible by 3 and 5
+ */
 public class FizzBuzz {
 
     public String fizzBuzz(int input) {
