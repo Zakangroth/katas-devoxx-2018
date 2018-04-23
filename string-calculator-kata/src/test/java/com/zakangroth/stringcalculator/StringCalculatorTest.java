@@ -41,4 +41,16 @@ public class StringCalculatorTest {
 
         assertEquals(expectedOutput, output);
     }
+
+    @Test
+    public void should_return_7_for_an_input_of_6_newline_1() {
+
+        StringCalculator calculator = new StringCalculator();
+        String input = "6\n1";
+        int expectedOutput = 7;
+
+        int output = calculator.add(input);
+
+        assertEquals(expectedOutput, output);
+    }
 }

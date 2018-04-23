@@ -13,6 +13,8 @@ import java.util.regex.Pattern;
  */
 public class StringCalculator {
 
+    public static final String SEPARATOR = "[,\n]";
+
     /**
      * The method can take 0, 1 or 2 numbers, and will return their sum.
      * For an empty string it will return 0.
@@ -26,5 +28,5 @@ public class StringCalculator {
             return 0;
         }
 
-        return Pattern.compile(",").splitAsStream(input).mapToInt(Integer::parseInt).sum();    }
+        return Pattern.compile(SEPARATOR).splitAsStream(input).mapToInt(Integer::parseInt).sum();    }
 }
