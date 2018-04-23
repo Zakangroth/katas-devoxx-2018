@@ -11,7 +11,8 @@
 
     <modules>
         <module>fizzBuzz-kata</module>
-        <module>leapyear-kata</module>
+        <module>leap-year-kata</module>
+        <module>rpn-calculator-kata</module>
     </modules>
 
     <properties>

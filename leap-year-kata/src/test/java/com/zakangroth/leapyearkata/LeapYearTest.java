@@ -7,7 +7,7 @@ import static org.junit.Assert.assertEquals;
 public class LeapYearTest {
 
     @Test
-    public void should_return_false_when_called_with_1900(){
+    public void should_return_false_when_called_with_1900() {
 
         LeapYear leapYear = new LeapYear();
 
@@ -20,7 +20,7 @@ public class LeapYearTest {
     }
 
     @Test
-    public void should_return_false_when_called_with_2001(){
+    public void should_return_false_when_called_with_2001() {
 
         LeapYear leapYear = new LeapYear();
 
@@ -33,7 +33,7 @@ public class LeapYearTest {
     }
 
     @Test
-    public void should_return_true_when_called_with_1996(){
+    public void should_return_true_when_called_with_1996() {
 
         LeapYear leapYear = new LeapYear();
 
@@ -46,7 +46,7 @@ public class LeapYearTest {
     }
 
     @Test
-    public void should_return_true_when_called_with_2000(){
+    public void should_return_true_when_called_with_2000() {
 
         LeapYear leapYear = new LeapYear();
 

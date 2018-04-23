@@ -7,7 +7,7 @@ import static org.junit.Assert.assertEquals;
 public class FizzBuzzTest {
 
     @Test
-    public void should_return_nothing_when_called_with_1(){
+    public void should_return_nothing_when_called_with_1() {
 
         FizzBuzz fizzBuzz = new FizzBuzz();
 
@@ -20,7 +20,7 @@ public class FizzBuzzTest {
     }
 
     @Test
-    public void should_return_fizz_when_called_with_3(){
+    public void should_return_fizz_when_called_with_3() {
 
         FizzBuzz fizzBuzz = new FizzBuzz();
 
@@ -33,7 +33,7 @@ public class FizzBuzzTest {
     }
 
     @Test
-    public void should_return_buzz_when_called_with_5(){
+    public void should_return_buzz_when_called_with_5() {
 
         FizzBuzz fizzBuzz = new FizzBuzz();
 
@@ -46,7 +46,7 @@ public class FizzBuzzTest {
     }
 
     @Test
-    public void should_return_fizzbuzz_when_called_with_15(){
+    public void should_return_fizzbuzz_when_called_with_15() {
 
         FizzBuzz fizzBuzz = new FizzBuzz();
 
