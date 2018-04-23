@@ -53,4 +53,15 @@ public class StringCalculatorTest {
 
         assertEquals(expectedOutput, output);
     }
+    @Test
+    public void should_return_4_for_an_input_of_2_custom_separator_2_and_custom_separator_is_w() {
+
+        StringCalculator calculator = new StringCalculator();
+        String input = "//w\n2w2";
+        int expectedOutput = 4;
+
+        int output = calculator.add(input);
+
+        assertEquals(expectedOutput, output);
+    }
 }
