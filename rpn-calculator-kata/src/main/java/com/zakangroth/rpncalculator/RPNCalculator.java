@@ -1,5 +1,11 @@
 package com.zakangroth.rpncalculator;
 
+import java.util.ArrayDeque;
+import java.util.Arrays;
+import java.util.Optional;
+import java.util.function.IntBinaryOperator;
+import java.util.regex.Pattern;
+
 /**
  * A RPN expression (or a postfix expression) is one of the following:
  * a number X, in which case the value of the expression is that of X;
@@ -18,13 +24,54 @@ package com.zakangroth.rpncalculator;
  */
 public class RPNCalculator {
 
-    public int convert(String input) {
-        String[] inputs = input.split(" ");
-        if (input.length() == 1){
-          return Integer.parseInt(input);
-        } else {
-            return Integer.parseInt(inputs[0]) + Integer.parseInt(inputs[1]);
+    private enum Operator {
+        ADD("+", (i1, i2) -> i1 + i2),
+        SUB("-", (i1, i2) -> i2 - i1);
+
+        private final IntBinaryOperator operator;
+        private final String symbol;
+
+        Operator(String symbol, IntBinaryOperator operator) {
+            this.symbol = symbol;
+            this.operator = operator;
+        }
+
+        public int convert(int i1, int i2) {
+            return operator.applyAsInt(i1, i2);
+        }
+
+        public static Operator of(String operationElement) {
+            Optional<Operator> operator = findOperatorBySymbol(operationElement);
+            return operator.orElse(null);
+        }
+
+        public static boolean isOperator(String operationElement) {
+            Optional<Operator> operator = findOperatorBySymbol(operationElement);
+            return operator.isPresent();
+        }
+
+        private static Optional<Operator> findOperatorBySymbol(String operationElement) {
+            return Arrays.stream(values()).filter(op -> op.symbol.equals(operationElement)).findAny();
         }
     }
 
+    public int convert(String input) {
+        RPNCalculatorArrayDeque deque = new RPNCalculatorArrayDeque();
+
+        Pattern.compile(" ").splitAsStream(input)
+                .forEach(
+                        operationElement -> {
+                            if (Operator.isOperator(operationElement)) {
+                                int leftOperand = deque.poll();
+                                int rightOperand = deque.poll();
+                                int result = Operator.of(operationElement).convert(leftOperand, rightOperand);
+                                deque.push(result);
+                            } else {
+                                deque.push(operationElement);
+                            }
+                        }
+                );
+
+        return deque.poll();
+    }
 }
