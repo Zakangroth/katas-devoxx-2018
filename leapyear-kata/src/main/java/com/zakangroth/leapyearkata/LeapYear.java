@@ -15,8 +15,20 @@ package com.zakangroth.leapyearkata;
  */
 public class LeapYear {
 
-    public boolean isLeapYear(int input) {
-        // Not implemented yet
-        return false;
+    public boolean isLeapYear(int year) {
+        return isTypicalLeapYear(year) && (!isAnAtypicalCommonYear(year) || isAnAtypicalLeapYear(year));
     }
+
+    private static boolean isTypicalLeapYear(int year) {
+        return (year % 4) == 0;
+    }
+
+    private boolean isAnAtypicalCommonYear(int year) {
+        return (year % 100) == 0;
+    }
+
+    private boolean isAnAtypicalLeapYear(int year) {
+        return (year % 400) == 0;
+    }
+
 }
