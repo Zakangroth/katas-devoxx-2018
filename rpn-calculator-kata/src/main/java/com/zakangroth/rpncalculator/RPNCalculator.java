@@ -19,7 +19,12 @@ package com.zakangroth.rpncalculator;
 public class RPNCalculator {
 
     public int convert(String input) {
-        return Integer.parseInt(input);
+        String[] inputs = input.split(" ");
+        if (input.length() == 1){
+          return Integer.parseInt(input);
+        } else {
+            return Integer.parseInt(inputs[0]) + Integer.parseInt(inputs[1]);
+        }
     }
 
 }
